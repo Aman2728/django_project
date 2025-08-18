@@ -1,0 +1,1214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+
+
+  <!-- Carousel -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css
+">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Custom StyleSheet -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+
+  <title>Phone Shop</title>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header id="header" class="header">
+    <div class="navigation">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav__hamburger">
+            <i class="ri-menu-3-line"></i>  
+          </div>
+        
+          <div class="nav__logo">
+            <a href="/" class="scroll-link">
+              PHONE
+            </a>
+          </div>
+        
+          <div class="nav__menu">
+            <div class="menu__top">
+              <span class="nav__category">PHONE</span>
+              <a href="#" class="close__toggle">
+                <i class="ri-close-line"></i>  
+              </a>
+            </div>
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="#header" class="nav__link scroll-link">Home</a>
+              </li>
+              <li class="nav__item">
+                <a href="#category" class="nav__link scroll-link">Category</a>
+              </li>
+              <li class="nav__item">
+                <a href="#news" class="nav__link scroll-link">Blog</a>
+              </li>
+              <li class="nav__item">
+                <a href="#contact" class="nav__link scroll-link">Contact</a>
+              </li>
+            </ul>
+          </div>
+        
+          <div class="nav__icons">
+            <a href="#" class="icon__item" id="login-btn">
+              {% if user %}
+                <span class="user-name">{{ user.name }}</span>
+                <i class="ri-user-line"></i>
+              {% else %}
+                <i class="ri-user-line"></i>
+              {% endif %}
+            </a>
+        
+            <a href="#" class="icon__item" id="search-btn">
+              <i class="ri-search-line"></i>  
+            </a>
+        
+            <a href="#" class="icon__item" id="cart-btn">
+              <i class="ri-shopping-basket-line"></i>  
+              <span id="cart__total">0</span>
+            </a>
+          </div>
+        </nav>
+        
+        
+      </div>
+    </div>
+    
+    <div class="hero">
+      <div class="glide" id="glide_1">
+          <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides">
+                  <li class="glide__slide">
+                      <div class="hero__center">
+                          <div class="hero__left">
+                              <span class="">New Inspiration 2020</span>
+                              <h1 class="">PHONES MADE FOR YOU!</h1>
+                              <p>Trending from mobile and headphone style collection</p>
+                              <a href="#"><button class="hero__btn">SHOP NOW</button></a>
+                          </div>
+                          <div class="hero__right">
+                              <div class="hero__img-container">
+                                  <img class="banner_01" src="{% static 'images/banner_01.png' %}" alt="banner2" />
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+                  <li class="glide__slide">
+                      <div class="hero__center">
+                          <div class="hero__left">
+                              <span>New Inspiration 2020</span>
+                              <h1>PHONES MADE FOR YOU!</h1>
+                              <p>Trending from mobile and headphone style collection</p>
+                              <a href="#"><button class="hero__btn">SHOP NOW</button></a>
+                          </div>
+                          <div class="hero__right">
+                              <img class="banner_02" src="{% static 'images/banner_02.png' %}" alt="banner2" />
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+          <div class="glide__bullets" data-glide-el="controls[nav]">
+              <button class="glide__bullet" data-glide-dir="=0"></button>
+              <button class="glide__bullet" data-glide-dir="=1"></button>
+          </div>
+  
+          <div class="glide__arrows" data-glide-el="controls">
+              <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                  <i class="ri-arrow-left-s-line"></i> <!-- Remix Icon -->
+              </button>
+              <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                  <i class="ri-arrow-right-s-line"></i> <!-- Remix Icon -->
+              </button>
+          </div>
+      </div>
+  </div>
+  
+  
+
+  <div class="auth" id="authForms">
+    <form id="loginForm" class="login-form">
+      <h3>Login Now</h3>
+      <div class="error-message" id="loginError"></div>
+      <input type="email" name="email" placeholder="Your email" class="box" required>
+      <input type="password" name="password" placeholder="Your password" class="box" required>
+      <p>Forgot your password? <a href="#" onclick="showResetForm()">Click Here</a></p>
+      <p>Don't have an account? <a href="#" onclick="showSignupForm()">Create now</a></p>
+      <input type="submit" value="Login now" class="btn">
+    </form>
+
+    <form id="signupForm" class="signup-form" style="display: none;">
+      <h3>Create Account</h3>
+      <div class="error-message" id="signupError"></div>
+      <input type="text" name="name" placeholder="Your full name" class="box" required>
+      <input type="email" name="email" placeholder="Your email" class="box" required>
+      <input type="tel" name="mobile" placeholder="Your mobile number" class="box" required>
+      <input type="password" name="password" placeholder="Create password" class="box" required>
+      <select name="role" class="box">
+        <option value="user">Regular User</option>
+        <option value="admin">Administrator</option>
+      </select>
+      <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+      <input type="submit" value="Sign up" class="btn">
+    </form>
+  </div>
+  
+  <div class="searchF">
+    <form action="" class="search-form">
+      <input type="search" id="search-box" placeholder="Search here..">
+      <!-- Replace the SVG icon with Remix Icon -->
+      <label for="search-box" class="ri-search-line"></label>  <!-- Remix search icon -->
+    </form>
+  </div>
+  
+
+  <div class="shopping-cart">
+      <div class="box">
+          <i class="ri-delete-bin-line"></i> <!-- Remix Icon for Trash -->
+          <img src="{% static 'images/products/iPhone/iphone1.jpeg' %}" alt="iPhone">
+          <div class="content">
+              <h3>iPhone</h3>
+              <span class="price">$800.99/-</span>
+              <span class="quantity">qty : 1</span>
+          </div>
+      </div>
+      <div class="box">
+          <i class="ri-delete-bin-line"></i> <!-- Remix Icon for Trash -->
+          <img src="{% static 'images/products/sumsung/samsung3.jpeg' %}" alt="Samsung A22">
+          <div class="content">
+              <h3>Samsung A22</h3>
+              <span class="price">$350.99/-</span>
+              <span class="quantity">qty : 1</span>
+          </div>
+      </div>
+      <div class="box">
+          <i class="ri-delete-bin-line"></i> <!-- Remix Icon for Trash -->
+          <img src="{% static 'images/products/headphone/headphone3.jpeg' %}" alt="Boat Headphone">
+          <div class="content">
+              <h3>Boat</h3>
+              <span class="price">$54.99/-</span>
+              <span class="quantity">qty : 1</span>
+          </div>
+      </div>
+      <div class="total">Total : $1354.69/-</div>
+      <a href="#" class="btn">Check out</a>
+  </div>
+
+  </header>
+  <!-- End Header -->
+
+  <!-- Main -->
+    <main id="main">
+      <div class="container">
+        <!-- All Products Section -->
+        <section class="section all-products" id="products">
+            <div class="title__container">
+                <div class="section__title active">
+                    <span class="dot"></span>
+                    <h1 class="primary__title">All Products</h1>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here dynamically -->
+            </div>
+        </section>
+
+        <section id="collection" class="section collection">
+            <div class="collection__container" data-aos="fade-up" data-aos-duration="1200">
+                <div class="collection__box">
+                    <div class="img__container">
+                        <img class="collection_02" src="{% static 'images/collection_02.png' %}" alt="Headphones">
+                    </div>
+                    <div class="collection__content">
+                        <div class="collection__data">
+                            <span>New Colors Introduced</span>
+                            <h1>HEADPHONES</h1>
+                            <a href="#shop">SHOP NOW</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection__box">
+                    <div class="img__container">
+                        <img class="collection_01" src="{% static 'images/collection_01.png' %}" alt="Smartphones">
+                    </div>
+                    <div class="collection__content">
+                        <div class="collection__data">
+                            <span>Phone Device Presets</span>
+                            <h1>SMARTPHONES</h1>
+                            <a href="#">SHOP NOW</a>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </section>
+
+
+        <!-- Latest Products -->
+
+        <section class="section latest__products" id="latest">
+            <div class="title__container">
+                <div class="section__title active" data-id="Latest Products">
+                    <span class="dot"></span>
+                    <h1 class="primary__title">Latest Products</h1>
+                </div>
+            </div>
+            <div class="container" data-aos="fade-up" data-aos-duration="1200">
+                <div class="glide" id="glide_2">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides latest-center">
+                            <li class="glide__slide">
+                                <div class="product">
+                                    <div class="product__header">
+                                        <img src="{% static 'images/products/iPhone/iphone6.jpeg' %}" alt="Apple iPhone 11">
+                                    </div>
+                                    <div class="product__footer">
+                                        <h3>Apple iPhone 11</h3>
+                                        <div class="rating">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-line"></i>
+                                        </div>
+                                        <div class="product__price">
+                                            <h4>$750</h4>
+                                        </div>
+                                        <a href="#"><button type="submit" class="product__btn">Add To Cart</button></a>
+                                    </div>
+                                    <ul>
+                                        <li><a data-tip="Quick View" href="#"><i class="ri-eye-line"></i></a></li>
+                                        <li><a data-tip="Add To Wishlist" href="#"><i class="ri-heart-line"></i></a></li>
+                                        <li><a data-tip="Add To Compare" href="#"><i class="ri-shuffle-line"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="glide__slide">
+                                <div class="product">
+                                    <div class="product__header">
+                                        <img src="{% static 'images/products/sumsung/samsung5.jpeg' %}" alt="Samsung Galaxy">
+                                    </div>
+                                    <div class="product__footer">
+                                        <h3>Samsung Galaxy</h3>
+                                        <div class="rating">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-line"></i>
+                                        </div>
+                                        <div class="product__price">
+                                            <h4>$900</h4>
+                                        </div>
+                                        <a href="#"><button type="submit" class="product__btn">Add To Cart</button></a>
+                                    </div>
+                                    <ul>
+                                        <li><a data-tip="Quick View" href="#"><i class="ri-eye-line"></i></a></li>
+                                        <li><a data-tip="Add To Wishlist" href="#"><i class="ri-heart-line"></i></a></li>
+                                        <li><a data-tip="Add To Compare" href="#"><i class="ri-shuffle-line"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                            <i class="ri-arrow-left-s-line"></i> <!-- Remix Icon -->
+                        </button>
+                        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                            <i class="ri-arrow-right-s-line"></i> <!-- Remix Icon -->
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+
+        <section class="category__section section" id="category">
+          <div class="tab__list">
+            <div class="title__container tabs">
+              <div class="section__titles category__titles ">
+                <div class="section__title filter-btn active" data-id="All Products">
+                  <span class="dot"></span>
+                  <h1 class="primary__title">All Products</h1>
+                </div>
+              </div>
+              <div class="section__titles">
+                <div class="section__title filter-btn" data-id="Trending Products">
+                  <span class="dot"></span>
+                  <h1 class="primary__title">Trending Products</h1>
+                </div>
+              </div>
+
+              <div class="section__titles">
+                <div class="section__title filter-btn" data-id="Special Products">
+                  <span class="dot"></span>
+                  <h1 class="primary__title">Special Products</h1>
+                </div>
+              </div>
+
+              <div class="section__titles">
+                <div class="section__title filter-btn" data-id="Featured Products">
+                  <span class="dot"></span>
+                  <h1 class="primary__title">Featured Products</h1>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="category__container" data-aos="fade-up" data-aos-duration="1200">
+            <div class="category__center"></div>
+          </div>
+      </div>
+      </section>
+
+      <!-- Facility Section -->
+      <section class="facility__section section" id="facility">
+        <div class="container">
+            <div class="facility__contianer" data-aos="fade-up" data-aos-duration="1200">
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <i class="ri-flight-takeoff-line"></i> <!-- Remix Icon -->
+                    </div>
+                    <p>FREE SHIPPING WORLDWIDE</p>
+                </div>
+    
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <i class="ri-refund-2-line"></i> <!-- Remix Icon -->
+                    </div>
+                    <p>100% MONEY BACK GUARANTEE</p>
+                </div>
+    
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <i class="ri-bank-card-line"></i> <!-- Remix Icon -->
+                    </div>
+                    <p>MANY PAYMENT GATEWAYS</p>
+                </div>
+    
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <i class="ri-customer-service-2-line"></i> <!-- Remix Icon -->
+                    </div>
+                    <p>24/7 ONLINE SUPPORT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+      </div>
+
+
+      <!-- Testimonial Section -->
+      <section class="section testimonial" id="testimonial">
+          <div class="testimonial__container">
+              <div class="glide" id="glide_4">
+                  <div class="glide__track" data-glide-el="track">
+                      <ul class="glide__slides">
+                          <li class="glide__slide">
+                              <div class="testimonial__box">
+                                  <div class="client__image">
+                                      <img src="{% static 'images/profile1.jpg' %}" alt="profile">
+                                  </div>
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+                                  <div class="client__info">
+                                      <h3>John Smith</h3>
+                                      <span>Founder at Apple</span>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="glide__slide">
+                              <div class="testimonial__box">
+                                  <div class="client__image">
+                                      <img src="{% static 'images/profile2.jpg' %}" alt="profile">
+                                  </div>
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+                                  <div class="client__info">
+                                      <h3>John Smith</h3>
+                                      <span>Founder at Apple</span>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="glide__slide">
+                              <div class="testimonial__box">
+                                  <div class="client__image">
+                                      <img src="{% static 'images/profile3.jpg' %}" alt="profile">
+                                  </div>
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+                                  <div class="client__info">
+                                      <h3>John Smith</h3>
+                                      <span>Founder at Apple</span>
+                                  </div>
+                              </div>
+                          </li>
+                          <li class="glide__slide">
+                              <div class="testimonial__box">
+                                  <div class="client__image">
+                                      <img src="{% static 'images/profile4.jpg' %}" alt="profile">
+                                  </div>
+                                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+                                  <div class="client__info">
+                                      <h3>John Smith</h3>
+                                      <span>Founder at Apple</span>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="glide__bullets" data-glide-el="controls[nav]">
+                      <button class="glide__bullet" data-glide-dir="=0"></button>
+                      <button class="glide__bullet" data-glide-dir="=1"></button>
+                      <button class="glide__bullet" data-glide-dir="=2"></button>
+                      <button class="glide__bullet" data-glide-dir="=3"></button>
+                  </div>
+              </div>
+          </div>
+      </section>
+      
+      <!-- News Section -->
+      <section class="section news" id="news">
+          <div class="container">
+              <div class="title__container">
+                  <div class="section__titles">
+                      <div class="section__title active">
+                          <span class="dot"></span>
+                          <h1 class="primary__title">Phone News</h1>
+                      </div>
+                  </div>
+              </div>
+              <div class="news__container">
+                  <div class="glide" id="glide_5">
+                      <div class="glide__track" data-glide-el="track">
+                          <ul class="glide__slides">
+                              <li class="glide__slide">
+                                  <div class="new__card">
+                                      <div class="card__header">
+                                          <img src="{% static 'images/news1.jpg' %}" alt="News 1">
+                                      </div>
+                                      <div class="card__footer">
+                                          <h3>Latest Smartphone Trends</h3>
+                                          <span>By Admin</span>
+                                          <p>Lorem ipsum dolor sit amet consectetur...</p>
+                                          <a href="#"><button>Read More</button></a>
+                                      </div>
+                                  </div>
+                              </li>
+                              <li class="glide__slide">
+                                  <div class="new__card">
+                                      <div class="card__header">
+                                          <img src="{% static 'images/news2.jpg' %}" alt="News 2">
+                                      </div>
+                                      <div class="card__footer">
+                                          <h3>New AI Features in Mobile</h3>
+                                          <span>By Admin</span>
+                                          <p>Lorem ipsum dolor sit amet consectetur...</p>
+                                          <a href="#"><button>Read More</button></a>
+                                      </div>
+                                  </div>
+                              </li>
+                              <li class="glide__slide">
+                                  <div class="new__card">
+                                      <div class="card__header">
+                                          <img src="{% static 'images/news3.jpg' %}" alt="News 3">
+                                      </div>
+                                      <div class="card__footer">
+                                          <h3>Smartphone Price Drops</h3>
+                                          <span>By Admin</span>
+                                          <p>Lorem ipsum dolor sit amet consectetur...</p>
+                                          <a href="#"><button>Read More</button></a>
+                                      </div>
+                                  </div>
+                              </li>
+                              <li class="glide__slide">
+                                  <div class="new__card">
+                                      <div class="card__header">
+                                          <img src="{% static 'images/news4.jpg' %}" alt="News 4">
+                                      </div>
+                                      <div class="card__footer">
+                                          <h3>Upcoming Phone Launches</h3>
+                                          <span>By Admin</span>
+                                          <p>Lorem ipsum dolor sit amet consectetur...</p>
+                                          <a href="#"><button>Read More</button></a>
+                                      </div>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      
+      <!-- Newsletter Section -->
+      <section class="section newsletter" id="contact">
+          <div class="container">
+              <div class="newsletter__content">
+                  <div class="newsletter__data">
+                      <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
+                      <p>Get the latest updates and exclusive deals.</p>
+                  </div>
+                  <form action="#">
+                      <input type="email" placeholder="Enter your email address" class="newsletter__email">
+                      <button class="newsletter__link">Subscribe</button>
+                  </form>
+              </div>
+          </div>
+      </section>
+      
+    </main>
+
+  <!-- End Main -->
+
+
+  <!-- Footer -->
+  <footer id="footer" class="section footer">
+      <div class="container">
+          <div class="footer__top">
+              <div class="footer-top__box">
+                  <h3>EXTRAS</h3>
+                  <a href="#">Brands</a>
+                  <a href="#">Gift Certificates</a>
+                  <a href="#">Affiliate</a>
+                  <a href="#">Specials</a>
+                  <a href="#">Site Map</a>
+              </div>
+              <div class="footer-top__box">
+                  <h3>INFORMATION</h3>
+                  <a href="#">About Us</a>
+                  <a href="#">Privacy Policy</a>
+                  <a href="#">Terms & Conditions</a>
+                  <a href="#">Contact Us</a>
+                  <a href="#">Site Map</a>
+              </div>
+              <div class="footer-top__box">
+                  <h3>MY ACCOUNT</h3>
+                  <a href="#">My Account</a>
+                  <a href="#">Order History</a>
+                  <a href="#">Wish List</a>
+                  <a href="#">Newsletter</a>
+                  <a href="#">Returns</a>
+              </div>
+              <div class="footer-top__box">
+                  <h3>CONTACT US</h3>
+                  <div>
+                      <span>
+                          <i class="ri-map-pin-line"></i> <!-- Remix Icon for location -->
+                      </span>
+                      42 Dream House, Dreammy street, 7131 Dreamville, USA
+                  </div>
+                  <div>
+                      <span>
+                          <i class="ri-mail-line"></i> <!-- Remix Icon for email -->
+                      </span>
+                      company@gmail.com
+                  </div>
+                  <div>
+                      <span>
+                          <i class="ri-phone-line"></i> <!-- Remix Icon for phone -->
+                      </span>
+                      456-456-4512
+                  </div>
+                  <div>
+                      <span>
+                          <i class="ri-plane-line"></i> <!-- Remix Icon for paper plane -->
+                      </span>
+                      Dream City, USA
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="footer__bottom">
+          <div class="footer-bottom__box">
+              <!-- Empty for custom content -->
+          </div>
+          <div class="footer-bottom__box">
+              <!-- Empty for custom content -->
+          </div>
+      </div>
+  </footer>
+  <!-- End Footer -->
+  
+  <!-- PopUp -->
+  <div class="popup hide__popup">
+      <div class="popup__content">
+          <div class="popup__close">
+              <i class="ri-close-line"></i> <!-- Remix Icon for close -->
+          </div>
+          <div class="popup__left">
+              <div class="popup-img__container">
+                  <img class="popup__img" src="{% static 'images/popup.jpg' %}" alt="popup">
+              </div>
+          </div>
+          <div class="popup__right">
+              <div class="right__content">
+                  <h1>Get Discount <span>30%</span> Off</h1>
+                  <p>Sign up to our newsletter and save 30% for your next purchase. No spam, we promise!</p>
+                  <form action="#">
+                      <input type="email" placeholder="Enter your email..." class="popup__form">
+                      <a href="#">Subscribe</a>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- Go To -->
+  <a href="#header" class="goto-top scroll-link">
+      <i class="ri-arrow-up-line"></i> <!-- Remix Icon for scroll up -->
+  </a>
+  
+  <!-- Include Remix Icon CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+  
+
+
+  <!-- Glide Carousel Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+  <!-- Animate On Scroll -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script src="{% static 'js/products.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="{% static 'js/slider.js' %}"></script>
+  
+  <script>
+    // Load products on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        loadProducts();
+        checkAuth();
+    });
+
+    function loadProducts() {
+        fetch('/getProduct/')
+            .then(response => response.json())
+            .then(data => {
+                const productsGrid = document.getElementById('productsGrid');
+                productsGrid.innerHTML = '';
+
+                data.products.forEach(product => {
+                    const productCard = createProductCard(product);
+                    productsGrid.appendChild(productCard);
+                });
+            })
+            .catch(error => console.error('Error loading products:', error));
+    }
+
+    function createProductCard(product) {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        
+        // Calculate discount price
+        const discountPrice = product.final_price;
+        const hasDiscount = product.discount > 0;
+        
+        card.innerHTML = `
+            <div class="product-image-container">
+                ${hasDiscount ? `<div class="discount-badge">-${product.discount}%</div>` : ''}
+                <img 
+                    src="${product.image || '{% static "images/products/default.jpg" %}'}" 
+                    class="product-image loading" 
+                    alt="${product.productname}"
+                    onload="this.classList.remove('loading'); this.classList.add('loaded')"
+                    onerror="this.src='{% static "images/products/default.jpg" %}'; this.classList.remove('loading'); this.classList.add('loaded')"
+                >
+            </div>
+            <div class="product-details">
+                <h3 class="product-title">${product.productname}</h3>
+                <div class="price-container">
+                    <div class="product-price ${hasDiscount ? 'has-discount' : ''}">
+                        ${hasDiscount ? `
+                            <span class="original-price">$${product.productprice}</span>
+                            <span class="final-price">$${discountPrice}</span>
+                        ` : `
+                            <span class="final-price">$${product.productprice}</span>
+                        `}
+                    </div>
+                </div>
+                <p class="product-description">${product.description}</p>
+                <div class="product-actions">
+                    <button class="order-btn" onclick="orderProduct(${product.id})">
+                        <i class="ri-shopping-cart-line"></i> Order Now
+                    </button>
+                </div>
+            </div>
+        `;
+        return card;
+    }
+
+    function orderProduct(productId) {
+        // Create order without login check
+        fetch('/create-order/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                quantity: 1
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Order placed successfully!');
+            } else {
+                alert(data.message || 'Failed to place order. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error placing order:', error);
+            alert('Failed to place order. Please try again.');
+        });
+    }
+
+    // Check authentication status on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAuth();
+      
+      // Add click event listener to the user icon
+      const loginBtn = document.getElementById('login-btn');
+      const authForms = document.getElementById('authForms');
+      
+      loginBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        authForms.style.display = authForms.style.display === 'block' ? 'none' : 'block';
+      });
+
+      // Close auth forms when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!authForms.contains(e.target) && !loginBtn.contains(e.target)) {
+          authForms.style.display = 'none';
+        }
+      });
+    });
+
+    function checkAuth() {
+      fetch('/check-auth/')
+        .then(response => response.json())
+        .then(data => {
+          if (data.is_authenticated) {
+            updateUIForLoggedInUser(data.user);
+          }
+        });
+    }
+
+    function updateUIForLoggedInUser(user) {
+      // Update navigation and show user info
+      const authForms = document.getElementById('authForms');
+      const loginBtn = document.getElementById('login-btn');
+      
+      // Update the user icon area
+      if (loginBtn) {
+        loginBtn.innerHTML = `<span class="user-name">${user.name}</span>`;
+      }
+
+      // Update auth forms
+      authForms.innerHTML = `
+        <div class="user-info">
+          <h3>Welcome, ${user.name}!</h3>
+          ${user.is_admin ? '<p class="admin-badge">Administrator</p>' : ''}
+          <div class="user-actions">
+            ${user.is_admin ? `
+              <a href="/dashboard/products/" class="btn admin-btn">Manage Products</a>
+            ` : ''}
+            <button onclick="logout()" class="btn logout-btn">Logout</button>
+          </div>
+        </div>
+      `;
+      
+      // Redirect admin users to the admin products page if they're logging in
+      if (user.is_admin && window.location.pathname === '/') {
+        window.location.href = '/admin/products/';
+      }
+    }
+
+    function showLoginForm() {
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('signupForm').style.display = 'none';
+    }
+
+    function showSignupForm() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('signupForm').style.display = 'block';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {
+        email: formData.get('email'),
+        password: formData.get('password')
+      };
+
+      fetch('/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.login) {
+          updateUIForLoggedInUser(data.user);
+          // Redirect to the appropriate page
+          window.location.href = data.user.redirect_url;
+        } else {
+          document.getElementById('loginError').textContent = data.message;
+        }
+      })
+      .catch(error => {
+        document.getElementById('loginError').textContent = 'An error occurred. Please try again.';
+      });
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        mobile: formData.get('mobile'),
+        password: formData.get('password'),
+        role: formData.get('role')
+      };
+
+      fetch('/signup/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.is_register) {
+          updateUIForLoggedInUser(data.user);
+        } else {
+          document.getElementById('signupError').textContent = data.message;
+          if (data.errors) {
+            const errorMessages = Object.values(data.errors).join('\n');
+            document.getElementById('signupError').textContent = errorMessages;
+          }
+        }
+      })
+      .catch(error => {
+        document.getElementById('signupError').textContent = 'An error occurred. Please try again.';
+      });
+    });
+
+    function logout() {
+      fetch('/logout/', {
+        method: 'POST'
+      })
+      .then(response => response.json())
+      .then(data => {
+        window.location.reload();
+      });
+    }
+  </script>
+
+  <style>
+    .auth {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      display: none;
+      max-width: 90%;
+      width: 400px;
+    }
+
+    .auth form {
+      width: 100%;
+    }
+
+    .auth .box {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .auth .btn {
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .auth .btn:hover {
+      background: #45a049;
+    }
+
+    .error-message {
+      color: #ff3333;
+      margin: 10px 0;
+      font-size: 0.9rem;
+    }
+
+    .user-info {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .user-info h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .auth h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 1.5rem;
+    }
+
+    .auth p {
+      margin: 10px 0;
+      font-size: 0.9rem;
+    }
+
+    .auth a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .auth a:hover {
+      text-decoration: underline;
+    }
+
+    .user-name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .admin-badge {
+      background: #4CAF50;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin: 10px 0;
+      display: inline-block;
+    }
+
+    .user-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .admin-btn {
+      background: #2196F3;
+    }
+
+    .admin-btn:hover {
+      background: #1976D2;
+    }
+
+    .logout-btn {
+      background: #f44336;
+    }
+
+    .logout-btn:hover {
+      background: #d32f2f;
+    }
+
+    select.box {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1em;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-image-container {
+        position: relative;
+        padding-top: 100%;
+        overflow: hidden;
+    }
+
+    .product-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s ease;
+    }
+
+    .product-image.loading {
+        opacity: 0;
+    }
+
+    .product-image.loaded {
+        opacity: 1;
+    }
+
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff4444;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+        z-index: 1;
+    }
+
+    .product-details {
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+
+    .price-container {
+        margin-bottom: 1rem;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #4CAF50;
+    }
+
+    .product-price.has-discount .original-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+    }
+
+    .product-description {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+
+    .product-actions {
+        margin-top: auto;
+    }
+
+    .order-btn {
+        width: 100%;
+        padding: 0.8rem;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .order-btn:hover {
+        background: #45a049;
+    }
+
+    .section.all-products {
+        padding: 4rem 0;
+    }
+
+    .title__container {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .section__title {
+        display: inline-block;
+        position: relative;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        background: #4CAF50;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 0.5rem;
+    }
+
+    .primary__title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        display: inline-block;
+    }
+  </style>
+
+</body>
+
+</html>
